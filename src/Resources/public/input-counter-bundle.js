@@ -6,7 +6,7 @@ window.InputCounterBundle = {
     initCounter: function()
     {
         // get config from body tag
-        var config = document.querySelector('body').getAttribute('data-input-count');
+        var config = document.querySelector('body').getAttribute('data-input-counter');
 
         if (!config)
         {
@@ -21,14 +21,24 @@ window.InputCounterBundle = {
         }
 
         function updateCounter(element, configData) {
-            var label = document.querySelector('[for="ctrl_' + configData.name + '"]');
+            var label = document.querySelector('[for="ctrl_' + configData.name + '"]'),
+                charCount = element.value.length,
+                maxCharCount = configData.max,
+                cssClass = 'tl_' + (charCount > maxCharCount ? 'red' : 'green');
 
             if (!label.getAttribute('data-text'))
             {
                 label.setAttribute('data-text', label.innerHTML);
             }
 
-            label.innerHTML = label.getAttribute('data-text') + ' (<span>' + element.value.length + '/' + configData.max + '</span>)';
+            if (typeof configData.skipColoring !== 'undefined' && configData.skipColoring)
+            {
+                cssClass = '';
+            }
+
+            label.innerHTML = label.getAttribute('data-text') + ' (<span' + (cssClass != '' ? ' class="' + cssClass + '"' : '') + '>' +
+                configData.message.replace('%charCount%', charCount).replace('%maxCharCount%', maxCharCount) +
+                '</span>)';
         }
 
         config.forEach(function(configData) {
