@@ -14,5 +14,5 @@ $GLOBALS['TL_HOOKS']['parseBackendTemplate']['addInputCount'] = ['huh.input_coun
  * Assets
  */
 if (\Contao\System::getContainer()->get('huh.utils.container')->isBackend()) {
-    $GLOBALS['TL_JAVASCRIPT']['contao-input-count-bundle'] = 'bundles/inputcounter/input-count-bundle.js|static';
+    $GLOBALS['TL_JAVASCRIPT']['contao-input-counter-bundle'] = 'bundles/heimrichhannotcontaoinputcounter/input-counter-bundle.js|static';
 }

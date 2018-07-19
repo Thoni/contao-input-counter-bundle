@@ -5,7 +5,7 @@ namespace HeimrichHannot\InputCounterBundle;
 use HeimrichHannot\InputCounterBundle\DependencyInjection\InputCounterExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class InputCounterBundle extends Bundle
+class HeimrichHannotContaoInputCounterBundle extends Bundle
 {
     public function getContainerExtension()
     {

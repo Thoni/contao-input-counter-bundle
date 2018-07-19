@@ -1,4 +1,4 @@
-window.InputCountBundle = {
+window.InputCounterBundle = {
     init: function()
     {
         this.initCounter();
@@ -20,15 +20,15 @@ window.InputCountBundle = {
             return;
         }
 
-        function updateCounter(element, name) {
-            var label = document.querySelector('[for="ctrl_' + name + '"]');
+        function updateCounter(element, configData) {
+            var label = document.querySelector('[for="ctrl_' + configData.name + '"]');
 
             if (!label.getAttribute('data-text'))
             {
                 label.setAttribute('data-text', label.innerHTML);
             }
 
-            label.innerHTML = label.getAttribute('data-text') + ' (<span>' + element.value.length + '</span>)';
+            label.innerHTML = label.getAttribute('data-text') + ' (<span>' + element.value.length + '/' + configData.max + '</span>)';
         }
 
         config.forEach(function(configData) {
@@ -37,15 +37,15 @@ window.InputCountBundle = {
             if (element)
             {
                 element.addEventListener('input', function() {
-                    updateCounter(element, configData.name);
+                    updateCounter(element, configData);
                 }, false);
 
-                updateCounter(element, configData.name);
+                updateCounter(element, configData);
             }
         });
     }
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-    InputCountBundle.init();
+    InputCounterBundle.init();
 });
